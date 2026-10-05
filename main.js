@@ -54,3 +54,36 @@ document.querySelectorAll('.filters button').forEach(button => button.addEventLi
  document.querySelectorAll('.product').forEach(card => card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter);
 }));
 document.querySelector('#year').textContent = new Date().getFullYear();
+
+const treatments = {
+ gold: {title:'GOLD+', kicker:'EL TOQUE DORADO', label:'UN REFLEJO DIFERENTE', description:'Un reflejo dorado sutil para explorar otra faceta de tus lentes. Conoce las características del tratamiento con nuestro equipo.'},
+ photo: {title:'Fotocromático', kicker:'LA LUZ CAMBIA. TUS LENTES TAMBIÉN.', label:'DE INTERIOR A EXTERIOR', description:'Explora cómo un lente puede cambiar de tono con la luz. Desliza para ver una representación de la transición.'},
+ screen: {title:'Para pantallas', kicker:'TU RUTINA, EN FOCO', label:'UNA MIRADA A TU DÍA DIGITAL', description:'¿Pasas tiempo frente a dispositivos? Conoce las opciones de lentes y tratamientos para tu rutina con asesoría personalizada.'},
+ reflection: {title:'Antirreflejo', kicker:'MENOS REFLEJOS EN LA SUPERFICIE', label:'EXPLORA EL CAMBIO DE REFLEJO', description:'Alterna la demostración para observar cómo se representan los reflejos de luz sobre un cristal.'}
+};
+const exhibit = document.querySelector('.tech-exhibit');
+const reflectionToggle = document.querySelector('#reflection-toggle');
+document.querySelectorAll('.tech-selectors button').forEach(button => button.addEventListener('click', () => {
+ document.querySelectorAll('.tech-selectors button').forEach(b => { const active = b === button; b.classList.toggle('active', active); b.setAttribute('aria-pressed', String(active)); });
+ const type = button.dataset.treatment;
+ const treatment = treatments[type];
+ exhibit.dataset.treatment = type;
+ exhibit.classList.remove('reflection-treated');
+ reflectionToggle.setAttribute('aria-pressed','false');
+ reflectionToggle.innerHTML = 'Ver con antirreflejo <span>→</span>';
+ document.querySelector('#tech-title').textContent = treatment.title;
+ document.querySelector('#tech-kicker').textContent = treatment.kicker;
+ document.querySelector('#tech-visual-label').textContent = treatment.label;
+ document.querySelector('#tech-description').textContent = treatment.description;
+ document.querySelector('#photo-control').hidden = type !== 'photo';
+ document.querySelector('#reflection-control').hidden = type !== 'reflection';
+}));
+const lightLevel = document.querySelector('#light-level');
+function updateTint() { exhibit.style.setProperty('--tint', String(Number(lightLevel.value) / 100 * .72)); document.querySelector('#light-output').value = `${lightLevel.value}%`; }
+lightLevel.addEventListener('input', updateTint);
+updateTint();
+reflectionToggle.addEventListener('click', () => {
+ const treated = exhibit.classList.toggle('reflection-treated');
+ reflectionToggle.setAttribute('aria-pressed', String(treated));
+ reflectionToggle.innerHTML = treated ? 'Ver sin antirreflejo <span>→</span>' : 'Ver con antirreflejo <span>→</span>';
+});
