@@ -105,3 +105,15 @@ catalogAngle.addEventListener('input', () => { catalogImage.style.transform = `r
 document.querySelector('.dialog-close').addEventListener('click', () => catalogDialog.close());
 catalogDialog.addEventListener('click', e => { if (e.target === catalogDialog) { const rect = catalogDialog.getBoundingClientRect(); if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) catalogDialog.close(); } });
 catalogDialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
+
+const visionSlider = document.querySelector('#vision-slider');
+const comparisonStage = document.querySelector('.comparison-stage');
+function updateComparison() {
+ const split = Number(visionSlider.value);
+ comparisonStage.style.setProperty('--split', `${split}%`);
+ const sharp = 100 - split;
+ document.querySelector('#vision-output').value = `${sharp}% de vista nítida`;
+ visionSlider.setAttribute('aria-valuetext', `${sharp}% de vista nítida`);
+}
+visionSlider.addEventListener('input', updateComparison);
+updateComparison();
