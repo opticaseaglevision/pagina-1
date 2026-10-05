@@ -117,3 +117,12 @@ function updateComparison() {
 }
 visionSlider.addEventListener('input', updateComparison);
 updateComparison();
+
+const promotions = document.querySelector('.promotions');
+if ('IntersectionObserver' in window && !reducedMotion.matches) {
+ promotions.classList.add('promo-ready');
+ const promoObserver = new IntersectionObserver(entries => {
+  if (entries.some(entry => entry.isIntersecting)) { promotions.classList.add('promo-visible'); promoObserver.disconnect(); }
+ }, {threshold: .15});
+ promoObserver.observe(promotions);
+}
