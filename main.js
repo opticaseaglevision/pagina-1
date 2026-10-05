@@ -87,3 +87,21 @@ reflectionToggle.addEventListener('click', () => {
  reflectionToggle.setAttribute('aria-pressed', String(treated));
  reflectionToggle.innerHTML = treated ? 'Ver sin antirreflejo <span>→</span>' : 'Ver con antirreflejo <span>→</span>';
 });
+
+const catalogDialog = document.querySelector('#catalog-dialog');
+const catalogImage = document.querySelector('#catalog-image');
+const catalogAngle = document.querySelector('#catalog-angle');
+document.querySelectorAll('.catalog-card').forEach(card => card.addEventListener('click', () => {
+ document.querySelector('#catalog-title').textContent = card.dataset.name;
+ document.querySelector('#catalog-description').textContent = card.dataset.description;
+ catalogImage.src = card.dataset.image;
+ catalogImage.alt = `Ilustración de referencia para ${card.dataset.name}`;
+ catalogAngle.value = '0';
+ catalogImage.style.transform = 'rotateY(0deg)';
+ catalogDialog.showModal();
+ document.body.classList.add('modal-open');
+}));
+catalogAngle.addEventListener('input', () => { catalogImage.style.transform = `rotateY(${catalogAngle.value}deg)`; });
+document.querySelector('.dialog-close').addEventListener('click', () => catalogDialog.close());
+catalogDialog.addEventListener('click', e => { if (e.target === catalogDialog) { const rect = catalogDialog.getBoundingClientRect(); if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) catalogDialog.close(); } });
+catalogDialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
