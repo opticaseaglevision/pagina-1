@@ -29,17 +29,27 @@ function positionBrandLogo() {
  const duration = hero.offsetHeight * .4;
  let progress = Math.max(0, Math.min(1, (window.scrollY - start) / duration));
  if (reducedMotion.matches) progress = progress >= .5 ? 1 : 0;
- const eased = progress * progress * (3 - 2 * progress);
- const interpolate = (from, to) => from + (to - from) * eased;
+ const smooth = value => value * value * (3 - 2 * value);
+ // Shrink below the navigation first, then dock the small bubble into its reserved space.
+ const morph = smooth(Math.min(1, progress / .8));
+ const dock = smooth(Math.max(0, (progress - .8) / .2));
+ const interpolate = (from, to) => from + (to - from) * morph;
+ const header = document.querySelector('.header');
+ const headerBottom = header.getBoundingClientRect().bottom;
  const width = interpolate(home.width, bubbleSize);
  const height = interpolate(home.height, bubbleSize);
+ const stagingY = interpolate(home.top, headerBottom + 12);
+ const y = stagingY + (corner - stagingY) * dock;
  floatingLogo.style.width = `${width}px`;
  floatingLogo.style.height = `${height}px`;
- floatingLogo.style.transform = `translate3d(${interpolate(home.left, corner)}px, ${interpolate(home.top, corner)}px, 0)`;
- floatingLogo.style.borderRadius = `${eased * 50}%`;
- floatingLogo.style.backgroundColor = `rgba(255,255,255,${eased})`;
- floatingLogo.style.boxShadow = `0 ${eased * 5}px ${eased * 25}px rgba(18,51,84,${eased * .18})`;
- floatingLogo.style.padding = `${eased * 7}px`;
+ floatingLogo.style.transform = `translate3d(${interpolate(home.left, corner)}px, ${y}px, 0)`;
+ floatingLogo.style.borderRadius = `${morph * 50}%`;
+ floatingLogo.style.backgroundColor = `rgba(255,255,255,${morph})`;
+ floatingLogo.style.boxShadow = `0 ${morph * 5}px ${morph * 25}px rgba(18,51,84,${morph * .18})`;
+ floatingLogo.style.padding = `${morph * 7}px`;
+ floatingLogo.style.zIndex = dock > 0 ? '40' : '20';
+ floatingLogo.style.clipPath = dock > 0 ? 'none' : `inset(${Math.max(0, headerBottom - y)}px 0 0 0)`;
+
  floatingLogo.classList.toggle('logo-is-bubble', progress >= 1);
  document.querySelector('.header').classList.toggle('header-with-bubble', progress > 0);
 }
