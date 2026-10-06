@@ -20,9 +20,9 @@ npm run preview
 
 Publicar el contenido de `dist/` en un alojamiento estático. Los recursos visuales SVG están incluidos en el proyecto y no requieren servicios externos. Los estilos presentados son ilustrativos, no un inventario real.
 
-Por indicación del usuario, omitir teléfono, WhatsApp, dirección y mapa hasta nueva confirmación. Mostrar horario: lunes a sábado, 10:00 a. m. a 7:00 p. m. Las solicitudes de examen se gestionan por Instagram; no se confirma una reserva automáticamente. Pendiente incorporar el logo original y fotografías reales. El contacto está conectado al Instagram oficial @opticas.eaglevision. La paleta usa turquesa, azul, fucsia y blanco.
+Por indicación del usuario, omitir teléfono, WhatsApp, dirección y mapa hasta nueva confirmación. Mostrar horario: lunes a sábado, 10:00 a. m. a 7:00 p. m. Las solicitudes de examen se gestionan por Instagram; no se confirma una reserva automáticamente. Se incorporó una adaptación transparente del logo facilitado como imagen en el chat. Pendiente fotografías reales. El contacto está conectado al Instagram oficial @opticas.eaglevision. La paleta usa turquesa, azul, fucsia y blanco.
 
-Identidad de referencia: logo facilitado por el usuario con ojo/águila azul, nombre fucsia y lema «Una clara vista a tu futuro». Pendiente incorporar el archivo original del logo; no se ha recreado ni sustituido por una imagen generada.
+Identidad de referencia: logo facilitado por el usuario con ojo/águila azul, nombre fucsia y lema «Una clara vista a tu futuro». Se usa assets/eagle-vision-logo.png, adaptación con fondo transparente realizada a partir de la imagen del chat mediante edición generativa. Puede presentar pequeñas diferencias frente al archivo original.
 
 ## GitHub Pages
 
