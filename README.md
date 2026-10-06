@@ -29,3 +29,5 @@ Identidad de referencia: logo facilitado por el usuario con ojo/águila azul, no
 La página también puede servirse directamente desde la rama `main`, carpeta `/ (root)`, sin compilación. En GitHub: Settings → Pages → Deploy from a branch → main → / (root) → Save. URL esperada tras el despliegue: https://opticaseaglevision.github.io/pagina-1/
 
 Catálogo: ONE, Hashtag, Flexi, clásicos, modernos e infantiles con ilustraciones de referencia, filtros y diálogo de perspectiva. Pendiente reemplazar ilustraciones con fotografías reales del inventario. Pendiente corregir alineación de efectos en cristales de la sección Tecnología; el usuario pidió conservarla por ahora.
+
+Orden de navegación: portada, óptica, servicios (con experiencia integrada), tecnología, comparador, colecciones (con infantiles), ofertas y contacto. Probador virtual y fotografías definitivas quedan pendientes.
