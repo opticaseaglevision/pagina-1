@@ -49,3 +49,5 @@
 .hero-logo-watermark img{clip-path:inset(0 0 35% 0)}
 
 .about-photo{height:auto;aspect-ratio:4/5}.about-photo img{object-fit:cover;object-position:50% 45%}@media(max-width:650px){.about-photo{height:auto;aspect-ratio:4/5}}
+
+.values{justify-content:flex-start;gap:50px}.values>span{display:flex;flex-direction:column;align-items:flex-start}.value-icon{width:42px;height:42px;color:#0061ad}.values small{font-size:11px;margin-top:12px;line-height:1.5}@media(max-width:650px){.values{gap:35px}.value-icon{width:38px;height:38px}.values small{font-size:10px}}
