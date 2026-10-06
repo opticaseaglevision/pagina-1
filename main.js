@@ -25,8 +25,9 @@ function positionBrandLogo() {
  const mobile = matchMedia('(max-width: 650px)').matches;
  const corner = mobile ? 14 : 20;
  const bubbleSize = mobile ? 66 : 76;
- const duration = hero.offsetTop + hero.offsetHeight * .65;
- let progress = Math.max(0, Math.min(1, window.scrollY / duration));
+ const start = hero.offsetTop + hero.offsetHeight * .5;
+ const duration = hero.offsetHeight * .4;
+ let progress = Math.max(0, Math.min(1, (window.scrollY - start) / duration));
  if (reducedMotion.matches) progress = progress >= .5 ? 1 : 0;
  const eased = progress * progress * (3 - 2 * progress);
  const interpolate = (from, to) => from + (to - from) * eased;
