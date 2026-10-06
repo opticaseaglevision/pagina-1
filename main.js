@@ -25,8 +25,11 @@ function positionBrandLogo() {
  const mobile = matchMedia('(max-width: 650px)').matches;
  const corner = mobile ? 14 : 20;
  const bubbleSize = mobile ? 66 : 76;
- const start = hero.offsetTop + hero.offsetHeight * .5;
- const duration = hero.offsetHeight * .4;
+ const headerHeight = document.querySelector('.header').offsetHeight;
+ const logoDocumentTop = home.top + window.scrollY;
+ const requestedStart = hero.offsetTop + hero.offsetHeight * .5;
+ const start = Math.max(0, Math.min(requestedStart, logoDocumentTop - headerHeight - 28));
+ const duration = Math.max(160, hero.offsetHeight * .3);
  let progress = Math.max(0, Math.min(1, (window.scrollY - start) / duration));
  if (reducedMotion.matches) progress = progress >= .5 ? 1 : 0;
  const eased = progress * progress * (3 - 2 * progress);
@@ -35,10 +38,9 @@ function positionBrandLogo() {
  const headerBottom = header.getBoundingClientRect().bottom;
  const width = interpolate(home.width, bubbleSize);
  const height = interpolate(home.height, bubbleSize);
- // Keep the logo visible until the halfway trigger, then move the same element continuously.
- const homeY = home.top + window.scrollY;
- const travel = progress * progress * progress;
- const y = homeY + (corner - homeY) * travel;
+ // Follow the page before departure; animate from the actual departure position.
+ const departureY = logoDocumentTop - start;
+ const y = progress === 0 ? home.top : departureY + (corner - departureY) * eased;
  const compact = width <= bubbleSize * 1.25;
  floatingLogo.style.width = `${width}px`;
  floatingLogo.style.height = `${height}px`;
