@@ -41,6 +41,7 @@ function positionBrandLogo() {
  floatingLogo.style.boxShadow = `0 ${eased * 5}px ${eased * 25}px rgba(18,51,84,${eased * .18})`;
  floatingLogo.style.padding = `${eased * 7}px`;
  floatingLogo.classList.toggle('logo-is-bubble', progress >= 1);
+ document.querySelector('.header').classList.toggle('header-with-bubble', progress > 0);
 }
 function scheduleBrandLogo() {
  if (!logoFramePending) { logoFramePending = true; requestAnimationFrame(positionBrandLogo); }
